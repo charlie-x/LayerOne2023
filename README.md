@@ -24,6 +24,17 @@ XC8 2.41
  In Windows use ZADIG https://github.com/pbatard/libwdi/releases/download/v1.5.0/zadig-2.8.exe to change the driver to WinUSB device ID will be 1209:2002
  Modified Bootloader code is at https://github.com/charlie-x/PIC16F1455_Bootloader full fork https://github.com/charlie-x/PIC16F1455_Bootloader with tools
  
+# dfu-utils to upload to badge
+ 
+ convert hex file from Bootloader MPLAB project ( must use the HTxxxxxx_BootLoader version )
+ 
+ get 454hex2dfu here https://github.com/charlie-x/PIC16F1-USB-DFU-Bootloader/tree/master/tools 
+ 
+  454hex2dfu input.hex OKBBPIC_firmware.production.dfu
+ 
+ put badge in DFU mode by holding button down and plugging into usb. (only when L1 bootloader is installed, if its overwritten you have to reinstall it with a PIC programmer like the pickkit3)
+ 
+  dfu-util  -l -D OKBBPIC_firmware.production.dfu -R
  
 # Optional Programmer
 
