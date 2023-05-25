@@ -1,0 +1,18 @@
+#
+# Generated - do not edit!
+#
+# NOCDDL
+#
+CND_BASEDIR=`pwd`
+# HT_PIC16F54 configuration
+CND_ARTIFACT_DIR_HT_PIC16F54=dist/HT_PIC16F54/production
+CND_ARTIFACT_NAME_HT_PIC16F54=OKBBPIC_firmware.production.hex
+CND_ARTIFACT_PATH_HT_PIC16F54=dist/HT_PIC16F54/production/OKBBPIC_firmware.production.hex
+# XC8_PIC16F54 configuration
+CND_ARTIFACT_DIR_XC8_PIC16F54=dist/XC8_PIC16F54/production
+CND_ARTIFACT_NAME_XC8_PIC16F54=OKBBPIC_firmware.production.hex
+CND_ARTIFACT_PATH_XC8_PIC16F54=dist/XC8_PIC16F54/production/OKBBPIC_firmware.production.hex
+# HT_PIC16F54_BootLoader configuration
+CND_ARTIFACT_DIR_HT_PIC16F54_BootLoader=dist/HT_PIC16F54_BootLoader/production
+CND_ARTIFACT_NAME_HT_PIC16F54_BootLoader=OKBBPIC_firmware.production.hex
+CND_ARTIFACT_PATH_HT_PIC16F54_BootLoader=dist/HT_PIC16F54_BootLoader/production/OKBBPIC_firmware.production.hex
