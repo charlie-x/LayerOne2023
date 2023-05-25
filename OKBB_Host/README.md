@@ -11,7 +11,11 @@ Windows Version of OKBB Macro uploader build with Visual Studoi 2022 , select X8
       unsigned char tempBuffer[20];
 
       int res;
-    
+      
+      // attempt to open device
+      hid_device* handle = hid_open ( 0x0032, 0x0808, NULL );
+      if( handle == 0 ) return -2;
+      
     if ( inputBuffer == NULL ) {
         return -1;
     }
@@ -34,11 +38,13 @@ Windows Version of OKBB Macro uploader build with Visual Studoi 2022 , select X8
         // skip into buffer
         inputBuffer += 8;
 
-		    _RPT4(_CRT_WARN, "uploadToFlash  [0x%02x] [%d] [%s] [%d]\n", tempBuffer[1] , tempBuffer[2] , &tempBuffer[3], 16);
+	//_RPT4(_CRT_WARN, "uploadToFlash  [0x%02x] [%d] [%s] [%d]\n", tempBuffer[1] , tempBuffer[2] , &tempBuffer[3], 16);
 
         //write to HID
         res = hid_write ( handle, tempBuffer, 16 + 1 );
+	
         if (res == -1) {
+	    hid_close(handle);
             return res;
         }
     }
@@ -50,6 +56,8 @@ Windows Version of OKBB Macro uploader build with Visual Studoi 2022 , select X8
 
     res = hid_write ( handle, tempBuffer, 16 + 1 );
 
+    hid_close(handle);
+    
     return res;
 }
 
