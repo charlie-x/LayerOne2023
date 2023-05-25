@@ -38,5 +38,5 @@ XC8 2.41
  
 # Optional Programmer
 
-Pickit 3 or better , Pickkit 2 supports CU with 3rd party sofware ,3 or 4 is recommended.
+Pickit 3 or better , Pickit 2 supports CU with 3rd party sofware ,3 or 4 is recommended.
 
