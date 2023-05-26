@@ -6,7 +6,7 @@ Windows Version of OKBB Macro uploader build with Visual Studoi 2022 , select X8
 
 # how to upload to the HID flash
 
-see linux folder for simple example
+see linux folder for simple example (untested linux example)
 
     int uploadToFlash ( unsigned char *inputBuffer )
     {
