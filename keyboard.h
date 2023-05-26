@@ -86,7 +86,7 @@ extern "C" {
 
     void ascii2scan(BYTE ascii, BYTE ledState, BYTE* modifier, BYTE* keycode);
     size_t print(const BYTE *buffer);
-    int strlen(char *str);
+    //int strlen(char *str);
     unsigned char typeChar(BYTE ascii);
     void pressKey(BYTE modifiers, BYTE keycode1, BYTE keycode2, BYTE keycode3, BYTE keycode4, BYTE keycode5, BYTE keycode6);
     BYTE getLEDstate(void);

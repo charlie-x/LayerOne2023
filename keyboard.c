@@ -5,6 +5,10 @@
  * Created on November 5, 2017, 10:57 AM
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include	<string.h>
+
 #include "keyboard.h"
 
 void ascii2scan ( unsigned char ascii, unsigned char ledState, unsigned char* modifier, unsigned char* keyCode )
@@ -317,21 +321,6 @@ unsigned char typeChar ( BYTE ascii )
     return 1;
 }
 
-int strlen ( char* str )
-{
-    if ( !str ) {
-        return 0;
-    }
-
-    char* ptr = str;
-
-    while ( *str ) {
-        ++str;
-    }
-
-    return str - ptr;
-}
-
 size_t print ( const BYTE* buffer )
 {
     size_t  size ;
@@ -349,3 +338,169 @@ size_t print ( const BYTE* buffer )
 
     return n;
 }
+
+#if 0
+
+#define MAX_COMMANDS ( 100 )
+
+typedef enum {
+    STRING_COMMAND,
+    DELAY_COMMAND,
+    REM_COMMAND,
+    ENTER_COMMAND,
+    GUI_COMMAND,
+    WINDOWS_COMMAND,
+    COMMAND_COMMAND,
+    CTRL_COMMAND,
+    SHIFT_COMMAND,
+    ALT_COMMAND,
+    SPACE_COMMAND,
+    CAPSLOCK_COMMAND,
+    APP_COMMAND,
+    MENU_COMMAND,
+    UPARROW_COMMAND,
+    DOWNARROW_COMMAND,
+    LEFTARROW_COMMAND,
+    RIGHTARROW_COMMAND,
+    DELETE_COMMAND,
+    BACKSPACE_COMMAND,
+    UNKNOWN_COMMAND
+} CommandType;
+
+typedef struct {
+    CommandType type;
+    char value[100];
+} Command;
+
+typedef struct {
+    const char* name;
+    CommandType commandType;
+} DuckyscriptCommand;
+
+const DuckyscriptCommand duckyscriptCommands[] = {
+    {"STRING", STRING_COMMAND},
+    {"DELAY", DELAY_COMMAND},
+    {"REM", REM_COMMAND},
+    {"ENTER", ENTER_COMMAND},
+    {"GUI", GUI_COMMAND},
+    {"WINDOWS", WINDOWS_COMMAND},
+    {"COMMAND", COMMAND_COMMAND},
+    {"CTRL", CTRL_COMMAND},
+    {"SHIFT", SHIFT_COMMAND},
+    {"ALT", ALT_COMMAND},
+    {"SPACE", SPACE_COMMAND},
+    {"CAPSLOCK", CAPSLOCK_COMMAND},
+    {"APP", APP_COMMAND},
+    {"MENU", MENU_COMMAND},
+    {"UPARROW", UPARROW_COMMAND},
+    {"DOWNARROW", DOWNARROW_COMMAND},
+    {"LEFTARROW", LEFTARROW_COMMAND},
+    {"RIGHTARROW", RIGHTARROW_COMMAND},
+    {"DELETE", DELETE_COMMAND},
+    {"BACKSPACE", BACKSPACE_COMMAND},
+};
+
+static Command command;
+
+void process_command(Command* command);
+
+static Command command;
+    
+int  parse_line(char* line) {
+    
+    int ret = 0;
+    
+    command.type = UNKNOWN_COMMAND;
+    
+    for (int i = 0; i < sizeof(duckyscriptCommands)/sizeof(duckyscriptCommands[0]); ++i) {
+        size_t len = strlen(duckyscriptCommands[i].name);
+        if (strncmp(line, duckyscriptCommands[i].name, len) == 0 && (line[len] == ' ' || line[len] == '\0')) {
+            command.type = duckyscriptCommands[i].commandType;
+            if (line[len] != '\0') { // If there is more than just the command
+                strncpy(command.value, line + len + 1, sizeof(command.value));
+                command.value[sizeof(command.value) - 1] = '\0'; // Ensure null termination
+            } else {
+                command.value[0] = '\0'; // Ensure empty string if no more input
+            }
+            break;
+        }
+    }
+
+    if (command.type == UNKNOWN_COMMAND) {
+        strncpy(command.value, line, sizeof(command.value));
+        command.value[sizeof(command.value) - 1] = '\0'; // Ensure null termination
+        ret = -1;
+    }
+    
+    return ret;
+}
+
+
+void process_command(Command* command)
+{  
+    unsigned char buf[65]; 
+    
+    int value = atoi ( command->value );
+    
+    switch (command->type) {
+        case STRING_COMMAND:
+            strncpy((char*)buf, command->value, sizeof(buf) - 1);
+            print(buf);
+            break;
+        case DELAY_COMMAND:
+//          printf("Delaying for: %s milliseconds\n", command->value);
+            _delay_ms( value );
+            break;
+        case REM_COMMAND:
+            break;
+        case ENTER_COMMAND:
+            print("\n");
+            break;
+        case GUI_COMMAND:
+            //printf("Sending GUI command\n");
+            break;
+        case WINDOWS_COMMAND:
+        case COMMAND_COMMAND:
+        case CTRL_COMMAND:
+            //printf("Sending control key\n");
+            break;
+        case SHIFT_COMMAND:
+//            printf("Sending shift key\n");
+            break;
+        case ALT_COMMAND:
+//            printf("Sending alt key\n");
+            break;
+        case SPACE_COMMAND:
+//            printf("Sending space key\n");
+            break;
+        case CAPSLOCK_COMMAND:
+            //printf("Toggling caps lock\n");
+            break;
+        case APP_COMMAND:
+        case MENU_COMMAND:
+           // printf("Opening application menu\n");
+            break;
+        case UPARROW_COMMAND:
+           // printf("Sending up arrow key\n");
+            break;
+        case DOWNARROW_COMMAND:
+           // printf("Sending down arrow key\n");
+            break;
+        case LEFTARROW_COMMAND:
+           // printf("Sending left arrow key\n");
+            break;
+        case RIGHTARROW_COMMAND:
+           // printf("Sending right arrow key\n");
+            break;
+        case DELETE_COMMAND:
+           // printf("Sending delete key\n");
+            break;
+        case BACKSPACE_COMMAND:
+            printf("Sending backspace key\n");
+            break;
+        default:
+            break;
+            //("Unknown command: %s\n", command->value);
+    }
+}
+#endif
