@@ -40,3 +40,8 @@ XC8 2.41
 
 Pickit 3 or better , Pickit 2 supports CU with 3rd party sofware ,3 or 4 is recommended.
 
+
+
+# badge competition
+
+there is a very partial rubberducky 2.0 script commented out in the code, whoever makes it run duckyscript first, wins the single prize. claim with charliex, mmca or datagram. 
